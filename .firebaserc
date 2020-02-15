@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "south-capital"
+  },
+  "targets": {
+    "south-capital": {
+      "hosting": {
+        "admin": [
+          "admin-south-capital"
+        ]
+      }
+    }
+  }
+}

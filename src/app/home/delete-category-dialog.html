@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>هل انت واثق؟</h1>
+<div mat-dialog-content  style="background-color:#fff;">
+  حذف 
+  {{ data.name }}
+  <br>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button color="basic" (click)='deleteFN(data)'>
+    حذف
+  </button>
+  <button mat-stroked-button color="warn" style="margin-right:30px;" (click)="cancelFN()">
+    الغاء
+  </button>
+</div>

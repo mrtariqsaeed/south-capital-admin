@@ -1,0 +1,14 @@
+.grid {
+    box-sizing: border-box;
+    float: right;
+    width:33.3%;
+    padding: 5px; 
+}
+.grid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); */
+    border-top: 10px solid #ffde00;
+}

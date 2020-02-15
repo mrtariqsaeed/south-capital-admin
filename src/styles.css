@@ -1,1 +1,213 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Almarai', sans-serif; background-color: #f7f7f7; }
+* {box-sizing: border-box;}
+header {
+    position: sticky !important;
+    top: 0;
+    left:0;
+    z-index: 1000;
+    background-color: #404042;
+}
+.header-container {
+    box-sizing: border-box;
+    padding-right: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.header-container::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.logo {
+    box-sizing: border-box;
+    float: right;
+    width: auto;
+    /* border: 1px solid #f7f7f7; */
+    padding-top: 10px;
+    padding-left: 30px;
+    font-weight: bold;
+    color: #ddd;
+    font-size: 15px;
+    height: 60px;
+    font-family: 'Almarai', Arial, sans-serif;
+}
+.intro {
+    float: right;
+}
+
+.logo img {
+    display: block;
+    max-height: 40px;
+    float: right;
+}
+.logo .title {
+    float: right;
+    height: 60px;
+    padding-right: 10px;
+    line-height: 150%;
+}
+.navigation {
+    float: right;
+    /* border-right: 10px solid #f7f7f7; */
+}
+nav {
+    background-color: #404042 !important;
+    text-align: center;
+}
+nav button {
+    background-color: #404042!important;
+    color: #ffde00!important;
+    font-size: 15px!important;
+    font-weight: 400!important;
+    border-radius: 0 !important;
+    padding: 5px 20px !important;
+    height: 60px;
+    box-sizing: border-box!important;
+}
+nav button.active {
+    background-color:#ffde00 !important;
+    color: #222!important;
+    font-weight: bold !important;
+}
+
+nav.second-nav {
+    background-color: #ffde00 !important;
+    padding-right: 30px;
+    text-align: center;
+}
+nav.second-nav button {
+    background-color:#ffde00 !important;
+    color: #222!important;
+    font-size: 15px!important;
+    font-weight: 400!important;
+    border-radius: 0 !important;
+    padding: 5px 20px !important;
+    height: 60px;
+    box-sizing: border-box!important;
+}
+nav.second-nav button.active {
+    background-color: #404042!important;
+    color: #ffde00!important;
+    font-weight: bold !important;
+}
+
+button.submit {
+    background-color: #404042!important;
+    color: #ffde00!important;
+    font-size: 15px!important;
+    font-weight: 400!important;
+    border-radius: 0 !important;
+    padding: 2px 30px !important;
+    height: 40px;
+    box-sizing: border-box!important;
+}
+
+button.add-button {
+    position: absolute;
+    left: 20px;
+    top: -35px;
+    background-color: #404042!important;
+    color: #ffde00!important;
+}
+
+section {
+    padding: 30px;
+    min-height: 500px;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+
+
+h1, h2, h3, h4, h5, h6, p, span, mat-panel-title {
+    font-family: 'Almarai', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, mat-panel-title {
+    font-weight: bold;
+    color: #404042;
+}
+
+mat-panel-title {
+    font-size: 18px;
+    color: #ffde00;
+}
+
+mat-expansion-panel p {
+    font-size: 16px;
+}
+
+p {
+    color: #666;
+    line-height: 200%;
+}
+mat-card {
+    border-top: 10px solid #ffde00;
+    margin-bottom: 30px;
+    padding: 0 !important;
+    border-radius: 0!important;
+}
+mat-card-content {
+    padding: 20px !important;
+}
+mat-card img.main {
+    display: block;
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
+    border-radius: 5px;
+    
+}
+mat-card-title {
+    font-family: 'Almarai', sans-serif;
+    font-size: 16px!important;
+    color: #404042;
+    /* font-weight: bold!important; */
+}
+
+mat-card-header {
+    box-sizing: border-box;
+    padding: 15px 10px!important;
+    height: 50px;
+    /* border-bottom: 1px solid #eee; */
+    margin-bottom: 30px;
+    background-color: #ffde00;
+}
+
+mat-header-cell {
+    font-family: 'Almarai', Arial, sans-serif;
+}
+
+mat-cell {
+    font-family: 'Almarai', Arial, sans-serif;
+}
+
+button {
+    font-family: 'Almarai', Arial, sans-serif!important;
+}
+
+mat-form-field {
+    margin-left: 30px;
+}
+
+input[type=text] {
+    font-family: 'Almarai', Arial, sans-serif!important;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    width: 100%;
+    background-color: #404042;
+    color: #ffde00;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>{{ article.title }}</h1>
+<div mat-dialog-content>
+  <p>{{ err }}</p>
+
+  <mat-form-field *ngIf='categories'>
+    <mat-label>
+        متفرع من
+    </mat-label>
+    <mat-select [(ngModel)]='article.parentID'>
+        <mat-option value=''>
+            متفرع من
+        </mat-option>
+        <mat-option *ngFor='let cat of categories' [value]='cat.id'>{{ cat.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type='text' [(ngModel)]='article.title' placeholder=" العنوان " />
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput [(ngModel)]='article.text' placeholder=" المقال " ></textarea>
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button color="basic" (click)='saveFN()'>
+    حفظ
+  </button>
+  <button mat-stroked-button color="warn" style="margin-right:30px;" (click)="cancelFN()">
+    الغاء
+  </button>
+</div>

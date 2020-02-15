@@ -1,0 +1,15 @@
+h1.mat-dialog-title {
+    font-family: 'Almarai', sans-serif;
+}
+
+div.mat-dialog-content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #eee;
+    font-family: 'Almarai', sans-serif;
+}
+
+div.mat-dialog-actions {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

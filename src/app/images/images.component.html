@@ -1,0 +1,28 @@
+<section>
+    <mat-card>
+        <mat-card-content>
+            <mat-form-field>
+                <mat-label>
+                    القسم
+                </mat-label>
+                <mat-select [(ngModel)]='parentID' (selectionChange)='categorySelected($event)'>
+                    <mat-option value=''>
+                         اختار القسم
+                    </mat-option>
+                    <mat-option *ngFor='let cat of categories$ | async' [value]='cat.id'>{{ cat.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            <input type='file' (change)='uploadFile($event)' />
+            <h3> {{ uploadPercent | async }} </h3>   
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-content>
+            <div class="grid" *ngFor='let img of images$ | async'>
+                <img [src]='img.image' />
+            </div>
+            
+            <div style="clear: both"></div>        
+        </mat-card-content>
+    </mat-card>
+</section>
