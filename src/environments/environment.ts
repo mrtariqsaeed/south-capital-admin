@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   firebase: {
     apiKey: "AIzaSyDCiDdZu8nYzUC6suYNMgUzakVBnTXceo0",
-    authDomain: "south-capital.firebaseapp.com",
+    authDomain: "admin-south-capital.firebaseapp.com",
     databaseURL: "https://south-capital.firebaseio.com",
     projectId: "south-capital",
     storageBucket: "south-capital.appspot.com",
