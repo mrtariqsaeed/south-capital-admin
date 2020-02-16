@@ -10,7 +10,7 @@
       <div style="clear: both;"></div>
     </div>
     <div class="navigation">
-      <nav>
+      <nav *ngIf='afAuth.user | async as user'>
         <button mat-button routerLink='/home' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>
           الأقسام
         </button>
@@ -21,6 +21,10 @@
         <button mat-button routerLink='/images' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>
           <mat-icon>add</mat-icon>
           اضافة صورة
+        </button>
+        <button mat-button routerLink='/images' (click)='logout()'>
+          <mat-icon>close</mat-icon>
+          خروج 
         </button>
       </nav>
       

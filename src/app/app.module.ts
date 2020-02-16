@@ -9,12 +9,15 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { environment } from '../environments/environment';
 import { HomeComponent, AddCategoryDialog, DeleteCategoryDialog, EditCategoryDialog } from './home/home.component';
 import { OopsComponent } from './oops/oops.component';
 import { CategoriesService } from '../services/categories.service';
 import { ArticlesComponent, AddArticleDialog, DeleteArticleDialog, EditArticleDialog, ViewArticleDialog } from './articles/articles.component';
 import { ImagesComponent } from './images/images.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { ImagesComponent } from './images/images.component';
     DeleteArticleDialog,
     EditArticleDialog,
     ViewArticleDialog,
-    ImagesComponent
+    ImagesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,9 @@ import { ImagesComponent } from './images/images.component';
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireAuthModule,
+    AngularFireAuthGuardModule
   ],
   entryComponents: [
     HomeComponent,
