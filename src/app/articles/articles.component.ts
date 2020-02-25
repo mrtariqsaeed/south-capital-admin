@@ -6,6 +6,10 @@ import { ArticlesService } from '../../services/articles.service'
 import { Article } from '../../models/articleInterface'
 import { Category } from '../../models/categoryInterface'
 import { CategoriesService } from '../../services/categories.service'
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular'
+import { AngularFireStorage } from '@angular/fire/storage'
+import { take, finalize } from 'rxjs/operators'
 
 @Component({
   selector: 'app-articles',
@@ -21,10 +25,15 @@ export class ArticlesComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort
   sub1: Subscription = new Subscription()
 
+  uploadPercent: Observable<number>;
+  url: Observable<string>
+
+
   constructor(
     public articlesService: ArticlesService,
     public dialog: MatDialog,
-    public categoriesService: CategoriesService
+    public categoriesService: CategoriesService,
+    private storage: AngularFireStorage
   ) {
     this.sub1 = new Subscription()
     this.sub1 = this.articlesService.allArticlesFN().subscribe((data: Article[]) => {
@@ -51,17 +60,34 @@ export class ArticlesComponent implements OnInit {
 
 
   addArticleFN(article: Article) {
-    let _article = {parentID: article.parentID, title: article.title} as Article
-    this.articlesService.addArticle(_article).then(() => {
-      // alert("Success!")
-    }, err => {
-      // alert("Something went wrong!")
-    })
+    const file = article.image;
+    const filePath = `articles\/img${new Date().getTime()}.jpg`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    // observe percentage changes
+    this.uploadPercent = task.percentageChanges();
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().pipe(take(1)).subscribe((url: string) => {
+          if(url) {
+            article.image = url
+            this.articlesService.addArticle(article).then(() => {
+              // alert("Success!")
+            }, err => {
+              // alert("Something went wrong!")
+            })
+          }
+        })
+      })
+    ).subscribe()
+
+    
   }
 
   addModalFN(): void {
     const dialogRef = this.dialog.open(AddArticleDialog, {
-      width: '400px',
+      width: '600px',
       data: this.categories
     })
 
@@ -141,6 +167,7 @@ export class ViewArticleDialog {
   styleUrls: ['./articles.component.css']
 })
 export class AddArticleDialog {
+  editor = ClassicEditor
   article = {parentID: ''} as Article
   err = ''
 
@@ -161,6 +188,14 @@ export class AddArticleDialog {
 
   cancelFN() {
     this.dialogRef.close()
+  }
+
+  onChange( { editor }: ChangeEvent ) {
+    this.article.text = editor.getData();
+  }
+
+  fileSelected(event) {
+    this.article.image = event.target.files[0]
   }
 
 }
@@ -200,6 +235,7 @@ export class DeleteArticleDialog {
 })
 
 export class EditArticleDialog {
+  editor = ClassicEditor
   categories: Category[]
   err = ''
   constructor(
@@ -223,5 +259,9 @@ export class EditArticleDialog {
       برجاء ادخال كافه البيانات
       `
     }
+  }
+
+  onChange( { editor }: ChangeEvent ) {
+    this.article.text = editor.getData();
   }
 }

@@ -5,11 +5,11 @@
                 <mat-label>
                     القسم
                 </mat-label>
-                <mat-select [(ngModel)]='parentID' (selectionChange)='categorySelected($event)'>
+                <mat-select [(ngModel)]='parent' (selectionChange)='categorySelected($event)'>
                     <mat-option value=''>
                          اختار القسم
                     </mat-option>
-                    <mat-option *ngFor='let cat of categories$ | async' [value]='cat.id'>{{ cat.name }}</mat-option>
+                    <mat-option *ngFor='let cat of categories$ | async' [value]='cat'>{{ cat.name }}</mat-option>
                 </mat-select>
               </mat-form-field>
             <input type='file' (change)='uploadFile($event)' />
@@ -19,7 +19,10 @@
     <mat-card>
         <mat-card-content>
             <div class="grid" *ngFor='let img of images$ | async'>
-                <img [src]='img.image' />
+                <img [src]='img.image' [alt]='img.alt' />
+                <button mat-stroked-button color='warn' (click)='deleteImage(img)' style="margin-top: 20px;">
+                   <mat-icon>close</mat-icon>
+                </button>
             </div>
             
             <div style="clear: both"></div>        

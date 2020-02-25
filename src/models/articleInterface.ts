@@ -3,4 +3,5 @@ export interface Article {
     parentID: string
     title: string
     text: string
+    image?: string
 }

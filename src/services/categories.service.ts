@@ -14,7 +14,7 @@ export class CategoriesService {
   categoriesArr: Category[]
 
   constructor(private afs: AngularFirestore) {
-    this.categoriesRef = this.afs.collection<Category>('categories')
+    this.categoriesRef = this.afs.collection<Category>('categories', ref => ref.orderBy('order', 'asc'))
     this.categories$ = this.categoriesRef.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {

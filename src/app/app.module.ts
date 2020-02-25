@@ -18,6 +18,7 @@ import { CategoriesService } from '../services/categories.service';
 import { ArticlesComponent, AddArticleDialog, DeleteArticleDialog, EditArticleDialog, ViewArticleDialog } from './articles/articles.component';
 import { ImagesComponent } from './images/images.component';
 import { LoginComponent } from './login/login.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LoginComponent } from './login/login.component';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
-    AngularFireAuthGuardModule
+    AngularFireAuthGuardModule,
+    CKEditorModule
   ],
   entryComponents: [
     HomeComponent,

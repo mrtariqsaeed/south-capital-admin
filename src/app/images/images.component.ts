@@ -16,7 +16,7 @@ export class ImagesComponent implements OnInit {
   images$: Observable<Image[]>
   uploadPercent: Observable<number>;
   url: Observable<string>
-  parentID = ''
+  parent: Category
   categories: Category[]
   categories$: Observable<Category[]>
 
@@ -30,7 +30,12 @@ export class ImagesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.images$ = this.imagesService.allImagesFN(this.parentID)
+    if(this.categories)
+    this.parent = this.categories[0]
+
+    if(this.parent && this.parent.id) 
+    this.images$ = this.imagesService.allImagesFN(this.parent.id)
+    
   }
 
   uploadFile(event) {
@@ -45,7 +50,7 @@ export class ImagesComponent implements OnInit {
       finalize(() => {
         fileRef.getDownloadURL().pipe(take(1)).subscribe((url: string) => {
           if(url) {
-            let image = {parentID: this.parentID, image: url}
+            let image = {parentID: this.parent.id, image: url, alt: this.parent.name}
             this.imagesService.addImage(image)
           }
         })
@@ -54,7 +59,13 @@ export class ImagesComponent implements OnInit {
   }
 
   categorySelected(event) {
-    this.images$ = this.imagesService.allImagesFN(event.value)
+    console.log(this.parent)
+    console.log(event.value)
+    this.images$ = this.imagesService.allImagesFN(event.value.id)
+  }
+
+  deleteImage(img: Image) {
+    this.imagesService.deleteImage(img)
   }
 
 }

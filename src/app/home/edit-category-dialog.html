@@ -13,9 +13,11 @@
         <mat-option *ngFor='let cat of categories' [value]='cat.id'>{{ cat.name }}</mat-option>
     </mat-select>
   </mat-form-field>
-
+  <mat-form-field>
+      <input matInput type='number' [(ngModel)]='category.order' placeholder=" الترتيب " />
+  </mat-form-field>
   <mat-form-field style="width:100%">
-    <input matInput placeholder="Name" autocomplete="off" [(ngModel)]='category.name' />
+    <input matInput placeholder=" الاسم " autocomplete="off" [(ngModel)]='category.name' />
   </mat-form-field>
 
 </div>

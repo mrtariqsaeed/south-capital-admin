@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs'
 import { Category } from '../../models/categoryInterface'
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
+import { AngularFireStorage } from '@angular/fire/storage'
+import { finalize, take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-home',
@@ -20,10 +22,12 @@ export class HomeComponent implements OnInit {
 
   parentID: string = ''
   name: string = ''
+  event: any
   
   constructor(
     public categoriesService: CategoriesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public storage: AngularFireStorage
   ) {
     this.sub1 = new Subscription()
     this.sub1 = this.categoriesService.allCategoriesFN().subscribe((data: Category[]) => {
@@ -46,16 +50,37 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  fileSelected(event: any) {
+    this.event = event
+  }
+
   addCategoryFN(category: Category) {
     if(category.name === '' || category.name === null || category.name === undefined) {
       alert("Name is required!")
     } else {
-      let cat = {parentID: category.parentID, name: category.name} as Category
-      this.categoriesService.addCategory(cat).then(() => {
-        // alert("Success!")
-      }, err => {
-        // alert("Something went wrong!")
-      })
+      const file = this.event.target.files[0];
+      const filePath = `images\/img${new Date().getTime()}.jpg`;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+
+      // observe percentage changes
+      // this.uploadPercent = task.percentageChanges();
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().pipe(take(1)).subscribe((url: string) => {
+            if(url) {
+              category.image = url
+              this.categoriesService.addCategory(category).then(() => {
+                // alert("Success!")
+              }, err => {
+                // alert("Something went wrong!")
+              })
+            }
+          })
+        })
+      ).subscribe()
+      // let cat = {parentID: category.parentID, name: category.name} as Category
+      
     }
   }
 
@@ -117,7 +142,7 @@ export class HomeComponent implements OnInit {
   styleUrls: ['./home.component.css']
 })
 export class AddCategoryDialog {
-  category = {parentID: ''} as Category
+  category = {parentID: '', order: 0} as Category
   err = ''
 
   constructor(
@@ -126,12 +151,12 @@ export class AddCategoryDialog {
   ) {}
 
   saveFN(): void {
-    if(!this.category.name) {
-      this.err = `
-      برجاء ادخال اسم القسم
-      `
-    }else {
+    if(this.category.name && this.category.order) {
       this.dialogRef.close(this.category)
+    }else {
+      this.err = `
+      برجاء ادخال كافه البيانات
+      `
     }
   }
 

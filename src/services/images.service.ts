@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Image } from '../models/imageInterface'
-
+import { AngularFireStorage } from '@angular/fire/storage'
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,7 @@ export class ImagesService {
   images$: Observable<Image[]>
   imagesArr: Image[]
 
-  constructor(private afs: AngularFirestore) {
-    
-  }
+  constructor(private afs: AngularFirestore, private afStorage: AngularFireStorage) {}
 
   allImagesFN(parentID: string): Observable<Image[]> {
     this.imagesRef = this.afs.collection<Image>('images', ref => ref.where('parentID', '==', parentID))
@@ -35,7 +33,9 @@ export class ImagesService {
     return this.afs.collection('images').add(image)
   }
 
-  deleteImage(id: string) {
-    return this.afs.doc('images/' + id).delete()
+  deleteImage(img: Image) {
+    this.afs.doc('images/' + img.id).delete().then (() => {
+      return this.afStorage.storage.refFromURL(img.image).delete()
+    })
   }
 }

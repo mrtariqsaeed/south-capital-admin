@@ -15,8 +15,13 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field>
+      <input matInput type='number' [(ngModel)]='category.order' placeholder=" الترتيب " />
+  </mat-form-field>
+  <mat-form-field>
       <input matInput type='text' [(ngModel)]='category.name' placeholder=" الاسم " />
   </mat-form-field>
+
+  <input type='file' placeholder=' اختر صوره ' />
 
 </div>
 <div mat-dialog-actions>

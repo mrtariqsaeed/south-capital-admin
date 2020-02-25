@@ -1,8 +1,8 @@
 <h1 mat-dialog-title>
   {{ article.title }}
 </h1>
-<div mat-dialog-content>
-  <b> {{ article.text }} </b>
+<img [src]="article.image" [alt]='article.title' style="width: 100%;margin-bottom: 30px;" />
+<div mat-dialog-content [innerHTML]='article.text'>
 </div>
 <div mat-dialog-actions>
   <button mat-stroked-button color="basic" (click)="cancelFN()">

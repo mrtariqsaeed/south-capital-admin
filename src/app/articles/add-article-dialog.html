@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>
-اضافة قسم
+اضافة مقال
 </h1>
 <div mat-dialog-content>
   <p>{{ err }}</p>
@@ -14,13 +14,14 @@
         <mat-option *ngFor='let cat of data' [value]='cat.id'>{{ cat.name }}</mat-option>
     </mat-select>
   </mat-form-field>
+  <br>
   <mat-form-field>
       <input matInput type='text' [(ngModel)]='article.title' placeholder=" العنوان " />
   </mat-form-field>
-
-  <mat-form-field>
-    <textarea matInput [(ngModel)]='article.text' placeholder=" المقال " ></textarea>
-  </mat-form-field>
+  <br><br>
+  <label> اختر صوره </label>
+  <input type='file' (change)='fileSelected($event)' /><br><br><br>
+  <ckeditor [editor]='editor' data='<p>Hello</p>' (change)='onChange($event)'></ckeditor>
 
 </div>
 <div mat-dialog-actions>
