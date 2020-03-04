@@ -3,5 +3,6 @@ export interface Article {
     parentID: string
     title: string
     text: string
+    brief: string
     image?: string
 }

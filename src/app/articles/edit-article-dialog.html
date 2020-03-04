@@ -17,7 +17,9 @@
   <mat-form-field>
     <input matInput type='text' [(ngModel)]='article.title' placeholder=" العنوان " />
   </mat-form-field>
-
+  <mat-form-field>
+    <textarea matInput type='text' [(ngModel)]='article.brief' placeholder=" مختصر " ></textarea>
+  </mat-form-field>
   <br><br>
   <ckeditor [editor]='editor' [data]='article.text' (change)='onChange($event)'></ckeditor>
 

@@ -21,7 +21,7 @@
       <input matInput type='text' [(ngModel)]='category.name' placeholder=" الاسم " />
   </mat-form-field>
 
-  <input type='file' placeholder=' اختر صوره ' />
+  <input type='file' placeholder=' اختر صوره ' (change)='fileSelected($event)' />
 
 </div>
 <div mat-dialog-actions>

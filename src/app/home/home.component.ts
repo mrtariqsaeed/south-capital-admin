@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
     if(category.name === '' || category.name === null || category.name === undefined) {
       alert("Name is required!")
     } else {
-      const file = this.event.target.files[0];
+      const file = category.image;
       const filePath = `images\/img${new Date().getTime()}.jpg`;
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, file);
@@ -158,6 +158,10 @@ export class AddCategoryDialog {
       برجاء ادخال كافه البيانات
       `
     }
+  }
+
+  fileSelected(event) {
+    this.category.image = event.target.files[0]
   }
 
   cancelFN() {

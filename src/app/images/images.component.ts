@@ -59,8 +59,6 @@ export class ImagesComponent implements OnInit {
   }
 
   categorySelected(event) {
-    console.log(this.parent)
-    console.log(event.value)
     this.images$ = this.imagesService.allImagesFN(event.value.id)
   }
 

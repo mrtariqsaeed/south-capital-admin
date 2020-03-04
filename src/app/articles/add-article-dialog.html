@@ -21,7 +21,10 @@
   <br><br>
   <label> اختر صوره </label>
   <input type='file' (change)='fileSelected($event)' /><br><br><br>
-  <ckeditor [editor]='editor' data='<p>Hello</p>' (change)='onChange($event)'></ckeditor>
+  <mat-form-field>
+    <textarea matInput type='text' [(ngModel)]='article.brief' placeholder=" مختصر " ></textarea>
+  </mat-form-field>
+  <ckeditor [editor]='editor' data='' (change)='onChange($event)' dir="rtl"></ckeditor>
 
 </div>
 <div mat-dialog-actions>
