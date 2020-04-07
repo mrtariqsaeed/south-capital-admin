@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>
+اضافة مقال
+</h1>
+
+<div mat-dialog-content>    
+  <label> اختر صوره </label><br>
+  <input type='file' (change)='fileSelected($event)' /><br><br><br>
+  <mat-form-field>
+    <input matInput type='number' [(ngModel)]='content.order' placeholder=" الترتيب " />
+  </mat-form-field>
+  <ckeditor [editor]='editor' data='' (change)='onChange($event)' dir="rtl"></ckeditor>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-stroked-button color="basic" (click)='save()'>
+    حفظ
+  </button>
+  <button mat-stroked-button color="warn" style="margin-right:30px;" (click)="cancel()">
+    الغاء
+  </button>
+</div>

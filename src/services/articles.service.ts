@@ -30,6 +30,10 @@ export class ArticlesService {
     return this.articles$
   }
 
+  getArticleByID(id: string) {
+    return this.afs.doc('articles/' + id).ref.get()
+  }
+
   addArticle(article: Article) {
     return this.afs.collection('articles').add(article)
   }

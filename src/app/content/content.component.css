@@ -13,7 +13,3 @@ div.mat-dialog-actions {
     padding-top: 20px;
     padding-bottom: 20px;
 }
-
-.mat-progress-spinner circle, .mat-spinner circle {
-    stroke: #ffde00!important;
-}

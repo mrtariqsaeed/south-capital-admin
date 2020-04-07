@@ -1,0 +1,42 @@
+<section>
+    <mat-card>
+        <mat-card-content>
+            <h3>
+                اضف صوره في الجاليري
+            </h3>
+            <mat-form-field>
+                <mat-label>
+                    العرض
+                </mat-label>
+                <mat-select [(ngModel)]='parent' (selectionChange)='offerSelected($event)'>
+                    <mat-option *ngFor='let offer of offers$ | async' [value]='offer'>{{ offer.title }}</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+            <mat-form-field>
+                <mat-label>
+                    الترتيب
+                </mat-label>
+                <input matInput type="number" [(ngModel)]='order' />
+            </mat-form-field><br><br>
+            <ng-container *ngIf='upload'>
+                <p>
+                    اختر صوره
+                </p>
+                <input type='file' (change)='uploadFile($event)' />
+                <h3> {{ uploadPercent | async }} </h3>
+            </ng-container>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-content>
+            <div class="grid" *ngFor='let slide of slides$ | async'>
+                <img [src]='slide.url' [alt]='slide.alt' />
+                <button mat-stroked-button color='warn' (click)='deleteSlide(slide)' style="margin-top: 20px;">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+
+            <div style="clear: both"></div>
+        </mat-card-content>
+    </mat-card>
+</section>

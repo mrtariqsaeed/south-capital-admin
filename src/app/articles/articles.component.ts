@@ -19,14 +19,13 @@ import { take, finalize } from 'rxjs/operators'
 export class ArticlesComponent implements OnInit {
   articles: Article[]
   categories: Category[]
-  displayedColumns: string[] = ['id', 'title', 'parent', 'action']
+  displayedColumns: string[] = ['id', 'title', 'parent', 'content', 'action']
   dataSource: MatTableDataSource<any>
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator
   @ViewChild(MatSort, {static: true}) sort: MatSort
   sub1: Subscription = new Subscription()
 
   uploadPercent: Observable<number>;
-  url: Observable<string>
 
 
   constructor(
@@ -61,7 +60,7 @@ export class ArticlesComponent implements OnInit {
 
   addArticleFN(article: Article) {
     const file = article.image;
-    const filePath = `articles\/img${new Date().getTime()}.jpg`;
+    const filePath = `articles\/img${Date.now()}.jpg`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -119,9 +118,9 @@ export class ArticlesComponent implements OnInit {
       data: article
     })
 
-    modal.afterClosed().subscribe((res: Category) => {
+    modal.afterClosed().subscribe((res: Article) => {
       if(res) {
-        this.articlesService.updateArticle(article).then(() => {
+        this.articlesService.updateArticle(res).then(() => {
           // alert('Successfully Updated!')
         })
       }

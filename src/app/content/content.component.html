@@ -1,0 +1,41 @@
+<section>
+
+    <button mat-flat-button class="action-button" (click)='addContentModal()'>
+        اضافة محتوي
+        <mat-icon>add</mat-icon>
+    </button>
+    
+    <mat-card *ngIf='article'>
+        <mat-card-header>
+            <mat-card-title>{{ article.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <img [src]="article.image" [alt]='article.title' style="display: block;margin:0px auto;width: 70%;margin-bottom: 30px;" />
+            <p>{{ article.brief }}</p>
+            <p [innerHTML]='article.text'></p>
+            <!-- <ng-container>
+                <img [src]="article.image" [alt]='article.title' style="display: block;margin:0px auto;width: 70%;margin-bottom: 30px;" />
+                <p [innerHTML]='article.text'></p>
+            </ng-container> -->
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngFor='let content of contents$ | async' style="margin-top: 50px!important;">
+        <button mat-fab class="add-button" (click)='deleteContentModal(content)'><mat-icon>clear</mat-icon></button>
+        <mat-card-content>
+            <img [src]="content.image" [alt]='content.title' style="display: block;margin:0px auto;width: 70%;margin-bottom: 30px;" *ngIf='content.image' />
+            <p [innerHTML]='content.text'></p>
+        </mat-card-content>
+    </mat-card>
+
+    <button mat-flat-button class="action-button" (click)='addContentModal()'>
+        اضافة محتوي
+        <mat-icon>add</mat-icon>
+    </button>
+
+    <button mat-button (click)='goArticles()' class="action-button">
+        العوده
+        <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+</section>
+

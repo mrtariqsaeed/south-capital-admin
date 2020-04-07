@@ -19,6 +19,9 @@ import { ArticlesComponent, AddArticleDialog, DeleteArticleDialog, EditArticleDi
 import { ImagesComponent } from './images/images.component';
 import { LoginComponent } from './login/login.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { SlideshowComponent } from './slideshow/slideshow.component';
+import { OffersComponent, AddOfferDialog, EditOfferDialog, DeleteOfferDialog, ViewOfferDialog } from './offers/offers.component';
+import { ContentComponent, AddContentDialog, DeleteContentDialog } from './content/content.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,16 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     EditArticleDialog,
     ViewArticleDialog,
     ImagesComponent,
-    LoginComponent
+    LoginComponent,
+    SlideshowComponent,
+    OffersComponent,
+    AddOfferDialog,
+    EditOfferDialog,
+    DeleteOfferDialog,
+    ViewOfferDialog,
+    ContentComponent,
+    AddContentDialog,
+    DeleteContentDialog
   ],
   imports: [
     BrowserModule,
@@ -58,7 +70,15 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     AddArticleDialog,
     DeleteArticleDialog,
     EditArticleDialog,
-    ViewArticleDialog
+    ViewArticleDialog,
+    OffersComponent,
+    AddOfferDialog,
+    EditOfferDialog,
+    DeleteOfferDialog,
+    ViewOfferDialog,
+    ContentComponent,
+    AddContentDialog,
+    DeleteContentDialog
   ],
   providers: [
     CategoriesService

@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator
   @ViewChild(MatSort, {static: true}) sort: MatSort
   sub1: Subscription = new Subscription()
+  loading = false
 
   parentID: string = ''
   name: string = ''
@@ -113,18 +114,53 @@ export class HomeComponent implements OnInit {
   }
 
   editModalFN(category: Category) {
+    const img = category.image
     const modal = this.dialog.open(EditCategoryDialog, {
       width: '400px',
       data: category
     })
 
     modal.afterClosed().subscribe((res: Category) => {
+      console.log(img)
       if(res) {
-        this.categoriesService.updateCategory(category).then(() => {
-          // alert('Successfully Updated!')
-        })
+        if(res.image == img) {
+          this.updateCategory(res)
+        }else {
+          this.updateImage(res, img)
+        }
+        
       }
     })
+  }
+
+  updateCategory(category: Category) {
+    this.categoriesService.updateCategory(category).then(() => {
+      // alert('Successfully Updated!')
+    })
+  }
+
+  updateImage(category: Category, oldImage: string) {
+    this.storage.storage.refFromURL(oldImage).delete().then(() => {
+      const file = category.image;
+      const filePath = `images\/img${new Date().getTime()}.jpg`;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+  
+      // observe percentage changes
+      // this.uploadPercent = task.percentageChanges();
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().pipe(take(1)).subscribe((url: string) => {
+            if(url) {
+              category.image = url
+              this.categoriesService.updateCategory(category).then(() => {
+                alert('Successfully Updated!')
+              }, err => console.log(err))
+            }
+          })
+        })
+      ).subscribe()
+    }, errr => console.log(errr))
   }
 
   ngOnDestroy() {
@@ -142,7 +178,7 @@ export class HomeComponent implements OnInit {
   styleUrls: ['./home.component.css']
 })
 export class AddCategoryDialog {
-  category = {parentID: '', order: 0} as Category
+  category = {parentID: '', order: 1} as Category
   err = ''
 
   constructor(
@@ -207,12 +243,15 @@ export class DeleteCategoryDialog {
 export class EditCategoryDialog {
   categories: Category[]
   err = ''
+  thumb: string
+
   constructor(
     public dialogRef: MatDialogRef<EditCategoryDialog>,
     @Inject(MAT_DIALOG_DATA) public category,
     public categoriesService: CategoriesService
   ) {
     this.categories = this.categoriesService.categoriesArr
+    this.thumb = category.image
   }
 
   cancelFN() {
@@ -228,5 +267,9 @@ export class EditCategoryDialog {
       برجاء ادخال اسم القسم
       `
     }
+  }
+
+  fileSelected(event) {
+    this.category.image = event.target.files[0]
   }
 }

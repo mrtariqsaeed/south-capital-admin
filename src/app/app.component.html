@@ -15,16 +15,20 @@
           الأقسام
         </button>
         <button mat-button routerLink='/articles' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>
-          <mat-icon>add</mat-icon>
-          اضافة مقال
+           المقالات
         </button>
+        <button mat-button routerLink='/offers' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>
+           العروض
+        </button>
+        <button mat-button routerLink='/slideshow' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>
+           جاليري العروض 
+       </button>
         <button mat-button routerLink='/images' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>
-          <mat-icon>add</mat-icon>
-          اضافة صورة
+           صور الاقسام
         </button>
         <button mat-button routerLink='/images' (click)='logout()'>
           <mat-icon>close</mat-icon>
-          خروج 
+          خروج
         </button>
       </nav>
       

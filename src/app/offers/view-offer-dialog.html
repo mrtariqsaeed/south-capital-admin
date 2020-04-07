@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>
+  {{ offer.title }}
+</h1>
+<div mat-dialog-content>
+  <img [src]="offer.image" [alt]='offer.title' style="display: block;margin:0px auto;width: 70%;margin-bottom: 30px;" />
+  <p>{{ offer.brief }}</p>
+  <p [innerHTML]='offer.text'></p>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button color="basic" (click)="cancel()">
+    اغلاق
+  </button>
+</div>

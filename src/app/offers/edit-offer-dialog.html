@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{ offer.title }}</h1>
+<div mat-dialog-content>
+  <p>{{ err }}</p>
+
+  <mat-form-field>
+    <input matInput type='text' [(ngModel)]='offer.title' placeholder=" العنوان " />
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput type='text' [(ngModel)]='offer.brief' placeholder=" مختصر " ></textarea>
+  </mat-form-field>
+  <br><br>
+  <ckeditor [editor]='editor' [data]='offer.text' (change)='onChange($event)'></ckeditor>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button color="basic" (click)='save()'>
+    حفظ
+  </button>
+  <button mat-stroked-button color="warn" style="margin-right:30px;" (click)="cancel()">
+    الغاء
+  </button>
+</div>

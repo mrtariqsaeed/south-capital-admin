@@ -25,8 +25,10 @@ export class ImagesComponent implements OnInit {
     public storage: AngularFireStorage,
     public categoriesService: CategoriesService
   ) {
-    this.categories = this.categoriesService.categoriesArr
     this.categories$ = this.categoriesService.allCategoriesFN()
+    this.categories$.pipe(take(1)).subscribe((data: Category[]) => {
+      this.categories = data;
+    })
   }
 
   ngOnInit() {

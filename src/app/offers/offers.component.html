@@ -1,6 +1,6 @@
 <section>
     <mat-card>
-        <button mat-fab class="add-button" (click)='addModalFN()'><mat-icon>add</mat-icon></button>
+        <button mat-fab class="add-button" (click)='addModal()'><mat-icon>add</mat-icon></button>
         <mat-card-content>
           
             <table mat-table [dataSource]="dataSource" matSort style="width:100%;">
@@ -11,22 +11,8 @@
                 </ng-container>
     
                 <ng-container matColumnDef="title">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> العنوان </mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
-                </ng-container>
-    
-                <ng-container matColumnDef="parent">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> متفرع من </mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{ returnParent(row.parentID) }} </mat-cell>
-                </ng-container>
-    
-                <ng-container matColumnDef="content">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> المحتوى </mat-header-cell>
-                  <mat-cell *matCellDef="let row">  
-                    <button mat-icon-button routerLink='/content/{{ row.id }}'>
-                      <mat-icon>keyboard_backspace</mat-icon>
-                    </button>
-                  </mat-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> العنوان </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{ row.title }} </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="action">
@@ -34,13 +20,13 @@
                   <mat-cell *matCellDef="let row">
                     <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
                     <mat-menu #menu="matMenu">
-                      <button mat-menu-item (click)='viewModalFN(row)'>
+                      <button mat-menu-item (click)='viewModal(row)'>
                         عرض
                       </button>
-                      <button mat-menu-item (click)="editModalFN(row)">
+                      <button mat-menu-item (click)="editModal(row)">
                         تعديل
                       </button>
-                      <button mat-menu-item (click)="deleteModalFN(row)">
+                      <button mat-menu-item (click)="deleteModal(row)">
                         حذف
                       </button>
                     </mat-menu>

@@ -34,8 +34,8 @@ export class ImagesService {
   }
 
   deleteImage(img: Image) {
-    this.afs.doc('images/' + img.id).delete().then (() => {
-      return this.afStorage.storage.refFromURL(img.image).delete()
-    })
+    this.afs.doc('images/' + img.id).delete()
+    return this.afStorage.storage.refFromURL(img.image).delete()
+    
   }
 }
