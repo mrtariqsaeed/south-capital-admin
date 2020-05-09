@@ -251,7 +251,7 @@ export class EditCategoryDialog {
     public categoriesService: CategoriesService
   ) {
     this.categories = this.categoriesService.categoriesArr
-    this.thumb = category.image
+    this.thumb = this.category.image
   }
 
   cancelFN() {

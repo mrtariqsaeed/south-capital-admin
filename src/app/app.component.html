@@ -15,25 +15,28 @@
           الأقسام
         </button>
         <button mat-button routerLink='/articles' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>
-           المقالات
+          المقالات
         </button>
         <button mat-button routerLink='/offers' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>
-           العروض
+          العروض
+        </button>
+        <button mat-button routerLink='/why' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>
+          مميزاتنا
         </button>
         <button mat-button routerLink='/slideshow' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>
-           جاليري العروض 
-       </button>
+          جاليري العروض
+        </button>
         <button mat-button routerLink='/images' routerLinkActive='active' [routerLinkActiveOptions]='{exact: true}'>
-           صور الاقسام
+          صور الاقسام
         </button>
         <button mat-button routerLink='/images' (click)='logout()'>
           <mat-icon>close</mat-icon>
           خروج
         </button>
       </nav>
-      
+
     </div>
-    <div style="clear: both;"></div>    
+    <div style="clear: both;"></div>
   </div>
 </header>
 

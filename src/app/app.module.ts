@@ -22,31 +22,20 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SlideshowComponent } from './slideshow/slideshow.component';
 import { OffersComponent, AddOfferDialog, EditOfferDialog, DeleteOfferDialog, ViewOfferDialog } from './offers/offers.component';
 import { ContentComponent, AddContentDialog, DeleteContentDialog } from './content/content.component';
+import { WhyComponent, AddWhyDialog, ViewWhyDialog, EditWhyDialog, DeleteWhyDialog } from './why/why.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    AddCategoryDialog,
-    DeleteCategoryDialog,
-    EditCategoryDialog,
     OopsComponent,
-    ArticlesComponent,
-    AddArticleDialog,
-    DeleteArticleDialog,
-    EditArticleDialog,
-    ViewArticleDialog,
     ImagesComponent,
     LoginComponent,
     SlideshowComponent,
-    OffersComponent,
-    AddOfferDialog,
-    EditOfferDialog,
-    DeleteOfferDialog,
-    ViewOfferDialog,
-    ContentComponent,
-    AddContentDialog,
-    DeleteContentDialog
+    HomeComponent, AddCategoryDialog, DeleteCategoryDialog, EditCategoryDialog, 
+    ArticlesComponent, AddArticleDialog, DeleteArticleDialog, EditArticleDialog, ViewArticleDialog,
+    OffersComponent, AddOfferDialog, EditOfferDialog, DeleteOfferDialog, ViewOfferDialog,
+    ContentComponent, AddContentDialog, DeleteContentDialog,
+    WhyComponent, AddWhyDialog, ViewWhyDialog, EditWhyDialog, DeleteWhyDialog
   ],
   imports: [
     BrowserModule,
@@ -62,23 +51,11 @@ import { ContentComponent, AddContentDialog, DeleteContentDialog } from './conte
     CKEditorModule
   ],
   entryComponents: [
-    HomeComponent,
-    AddCategoryDialog,
-    DeleteCategoryDialog,
-    EditCategoryDialog,
-    ArticlesComponent,
-    AddArticleDialog,
-    DeleteArticleDialog,
-    EditArticleDialog,
-    ViewArticleDialog,
-    OffersComponent,
-    AddOfferDialog,
-    EditOfferDialog,
-    DeleteOfferDialog,
-    ViewOfferDialog,
-    ContentComponent,
-    AddContentDialog,
-    DeleteContentDialog
+    HomeComponent, AddCategoryDialog, DeleteCategoryDialog, EditCategoryDialog, 
+    ArticlesComponent, AddArticleDialog, DeleteArticleDialog, EditArticleDialog, ViewArticleDialog,
+    OffersComponent, AddOfferDialog, EditOfferDialog, DeleteOfferDialog, ViewOfferDialog,
+    ContentComponent, AddContentDialog, DeleteContentDialog,
+    WhyComponent, AddWhyDialog, ViewWhyDialog, EditWhyDialog, DeleteWhyDialog
   ],
   providers: [
     CategoriesService

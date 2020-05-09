@@ -9,6 +9,7 @@ import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo, canAc
 import { OffersComponent } from './offers/offers.component';
 import { SlideshowComponent } from './slideshow/slideshow.component';
 import { ContentComponent } from './content/content.component';
+import { WhyComponent } from './why/why.component';
 
 const redirectVisitor = redirectUnauthorizedTo(['login'])
 const redirectUser = redirectLoggedInTo(['home'])
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'articles', component: ArticlesComponent, ...canActivate(redirectVisitor)},
   {path: 'content/:id', component: ContentComponent, ...canActivate(redirectVisitor)},
   {path: 'offers', component: OffersComponent, ...canActivate(redirectVisitor)},
+  {path: 'why', component: WhyComponent, ...canActivate(redirectVisitor)},
   {path: 'slideshow', component: SlideshowComponent, ...canActivate(redirectVisitor)},
   {path: 'images', component: ImagesComponent, ...canActivate(redirectVisitor)},
   {path: 'login', component: LoginComponent, ...canActivate(redirectUser)},
