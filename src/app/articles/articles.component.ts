@@ -113,6 +113,8 @@ export class ArticlesComponent implements OnInit {
   }
 
   editModalFN(article: Article) {
+    const img = article.image
+
     const modal = this.dialog.open(EditArticleDialog, {
       width: '400px',
       data: article
@@ -120,11 +122,44 @@ export class ArticlesComponent implements OnInit {
 
     modal.afterClosed().subscribe((res: Article) => {
       if(res) {
-        this.articlesService.updateArticle(res).then(() => {
-          // alert('Successfully Updated!')
-        })
+        if(res.image == img) {
+          this.updateArticle(res)
+        }else {
+          this.updateImage(res, img)
+        }
+        
       }
     })
+  }
+
+  updateArticle(article: Article) {
+    this.articlesService.updateArticle(article).then(() => {
+      // alert('Successfully Updated!')
+    })
+  }
+
+  updateImage(article: Article, oldImage: string) {
+    this.storage.storage.refFromURL(oldImage).delete().then(() => {
+      const file = article.image;
+      const filePath = `articles\/img${new Date().getTime()}.jpg`;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+  
+      // observe percentage changes
+      // this.uploadPercent = task.percentageChanges();
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().pipe(take(1)).subscribe((url: string) => {
+            if(url) {
+              article.image = url
+              this.articlesService.updateArticle(article).then(() => {
+                alert('Successfully Updated!')
+              }, err => console.log(err))
+            }
+          })
+        })
+      ).subscribe()
+    }, errr => console.log(errr))
   }
 
   viewModalFN(article: Article) {
@@ -236,6 +271,7 @@ export class DeleteArticleDialog {
 export class EditArticleDialog {
   editor = ClassicEditor
   categories: Category[]
+  thumb: string
   err = ''
   constructor(
     public dialogRef: MatDialogRef<EditArticleDialog>,
@@ -243,6 +279,7 @@ export class EditArticleDialog {
     public categoriesService: CategoriesService
   ) {
     this.categories = this.categoriesService.categoriesArr
+    this.thumb = this.article.image
   }
 
   cancelFN() {
@@ -262,5 +299,9 @@ export class EditArticleDialog {
 
   onChange( { editor }: ChangeEvent ) {
     this.article.text = editor.getData();
+  }
+
+  fileSelected(event) {
+    this.article.image = event.target.files[0]
   }
 }

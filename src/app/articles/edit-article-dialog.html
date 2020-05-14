@@ -2,6 +2,10 @@
 <div mat-dialog-content>
   <p>{{ err }}</p>
 
+  <img [src]='thumb' style='width: 80%' *ngIf='thumb' /><br><br>
+  <label> اختر صوره جديده </label><br><br>
+  <input type='file' (change)='fileSelected($event)' /><br><br><br>
+
   <mat-form-field *ngIf='categories'>
     <mat-label>
         متفرع من

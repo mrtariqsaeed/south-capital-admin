@@ -41,7 +41,7 @@ export class ArticlesService {
   updateArticle(article: Article) {
     const id = article.id
     delete article.id
-    return this.afs.doc('articles/' + id).update({parentID: article.parentID, title: article.title, brief: article.brief, text: article.text})
+    return this.afs.doc('articles/' + id).update(article)
   }
 
   deleteArticle(id: string) {
