@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SlideshowComponent } from './slideshow/slideshow.component';
 import { OffersComponent, AddOfferDialog, EditOfferDialog, DeleteOfferDialog, ViewOfferDialog } from './offers/offers.component';
+import { ServicesComponent, AddServiceDialog, EditServiceDialog, DeleteServiceDialog, ViewServiceDialog } from './services/services.component';
 import { ContentComponent, AddContentDialog, DeleteContentDialog } from './content/content.component';
 import { WhyComponent, AddWhyDialog, ViewWhyDialog, EditWhyDialog, DeleteWhyDialog } from './why/why.component';
 
@@ -34,6 +35,7 @@ import { WhyComponent, AddWhyDialog, ViewWhyDialog, EditWhyDialog, DeleteWhyDial
     HomeComponent, AddCategoryDialog, DeleteCategoryDialog, EditCategoryDialog, 
     ArticlesComponent, AddArticleDialog, DeleteArticleDialog, EditArticleDialog, ViewArticleDialog,
     OffersComponent, AddOfferDialog, EditOfferDialog, DeleteOfferDialog, ViewOfferDialog,
+    ServicesComponent, AddServiceDialog, EditServiceDialog, DeleteServiceDialog, ViewServiceDialog,
     ContentComponent, AddContentDialog, DeleteContentDialog,
     WhyComponent, AddWhyDialog, ViewWhyDialog, EditWhyDialog, DeleteWhyDialog
   ],
@@ -54,6 +56,7 @@ import { WhyComponent, AddWhyDialog, ViewWhyDialog, EditWhyDialog, DeleteWhyDial
     HomeComponent, AddCategoryDialog, DeleteCategoryDialog, EditCategoryDialog, 
     ArticlesComponent, AddArticleDialog, DeleteArticleDialog, EditArticleDialog, ViewArticleDialog,
     OffersComponent, AddOfferDialog, EditOfferDialog, DeleteOfferDialog, ViewOfferDialog,
+    ServicesComponent, AddServiceDialog, EditServiceDialog, DeleteServiceDialog, ViewServiceDialog,
     ContentComponent, AddContentDialog, DeleteContentDialog,
     WhyComponent, AddWhyDialog, ViewWhyDialog, EditWhyDialog, DeleteWhyDialog
   ],

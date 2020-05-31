@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>
+  اضافة 
+  </h1>
+  <div mat-dialog-content>
+    <p>{{ err }}</p>
+    
+    <mat-form-field>
+        <input matInput type='number' [(ngModel)]='service.order' placeholder=" الترتيب " />
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type='text' [(ngModel)]='service.title' placeholder=" العنوان " />
+    </mat-form-field>
+  
+    <mat-form-field>
+      <textarea matInput type='text' [(ngModel)]='service.text' placeholder=" الوصف " ></textarea>
+    </mat-form-field>
+  
+    <input type='file' placeholder=' اختر صوره ' (change)='fileSelected($event)' />
+  
+  </div>
+  <div mat-dialog-actions>
+    <button mat-stroked-button color="basic" (click)='save()'>
+      حفظ
+    </button>
+    <button mat-stroked-button color="warn" style="margin-right:30px;" (click)="cancel()">
+      الغاء
+    </button>
+    
+  </div>
+  

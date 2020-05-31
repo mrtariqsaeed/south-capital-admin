@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>
+  تعديل 
+  </h1>
+  <div mat-dialog-content>
+    <p>{{ err }}</p>
+
+    <img [src]='thumb' style='width: 80%' *ngIf='thumb' /><br><br>
+
+    <label> اختر صوره جديده </label><br><br>
+    <input type='file' (change)='fileSelected($event)' /><br><br><br>
+      
+    <mat-form-field>
+        <input matInput type='number' [(ngModel)]='service.order' placeholder=" الترتيب " />
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type='text' [(ngModel)]='service.title' placeholder=" العنوان " />
+    </mat-form-field>
+  
+    <mat-form-field>
+      <textarea matInput type='text' [(ngModel)]='service.text' placeholder=" الوصف " ></textarea>
+    </mat-form-field>
+  
+  
+  </div>
+  <div mat-dialog-actions>
+    <button mat-stroked-button color="basic" (click)='save()'>
+      حفظ
+    </button>
+    <button mat-stroked-button color="warn" style="margin-right:30px;" (click)="cancel()">
+      الغاء
+    </button>
+    
+  </div>
+  
