@@ -42,7 +42,7 @@ export class OffersService {
   deleteOffer(offer: Offer) {
     if(offer.image)
       this.afstorage.storage.refFromURL(offer.image).delete()
-
+    this.afs.collection('slide')
     return this.afs.doc('offers/' + offer.id).delete()
   }
 }

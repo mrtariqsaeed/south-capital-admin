@@ -8,6 +8,8 @@ import { AngularFireStorage } from '@angular/fire/storage'
 import { take, finalize } from 'rxjs/operators'
 import { OffersService } from '../../services/offers.service'
 import { Observable, Subscription } from 'rxjs';
+import { SlideshowService } from '../../services/slideshow.service'
+import { Slide } from 'src/models/slideInterface';
 
 @Component({
   selector: 'app-offers',
@@ -30,7 +32,8 @@ export class OffersComponent implements OnInit {
   constructor(
     public offersService: OffersService,
     public dialog: MatDialog,
-    public storage: AngularFireStorage
+    public storage: AngularFireStorage,
+    private slideshowService: SlideshowService
   ) {
     this.sub1 = new Subscription
     this.sub1 = this.offersService.getAllOffers().subscribe((data: Offer[]) => {
@@ -90,25 +93,64 @@ export class OffersComponent implements OnInit {
     modal.afterClosed().subscribe((res: Offer) => {
       if(res) {
         this.offersService.deleteOffer(res).then(() => {
-          // alert('Deleted Successfully!')
+          this.slideshowService.getSlidesPerOffer(res.id).pipe(take(1)).subscribe((slides: Slide[]) => {
+            slides.forEach((slide: Slide) => {
+              this.slideshowService.deleteSlide(slide)
+            })
+          })
         })
       }
     })
   }
 
   editModal(offer: Offer) {
+    const img = offer.image
     const modal = this.dialog.open(EditOfferDialog, {
       width: '400px',
       data: offer
     })
 
     modal.afterClosed().subscribe((res: Offer) => {
+      console.log(img)
       if(res) {
-        this.offersService.updateOffer(offer).then(() => {
-          // alert('Successfully Updated!')
-        })
+        if(res.image == img) {
+          this.updateOffer(res)
+        }else {
+          this.updateImage(res, img)
+        }
+        
       }
     })
+  }
+
+  updateOffer(offer: Offer) {
+    this.offersService.updateOffer(offer).then(() => {
+      // alert('Successfully Updated!')
+    })
+  }
+
+  updateImage(offer: Offer, oldImage: string) {
+    this.storage.storage.refFromURL(oldImage).delete().then(() => {
+      const file = offer.image;
+      const filePath = `offers\/img${new Date().getTime()}.jpg`;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+  
+      // observe percentage changes
+      // this.uploadPercent = task.percentageChanges();
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().pipe(take(1)).subscribe((url: string) => {
+            if(url) {
+              offer.image = url
+              this.offersService.updateOffer(offer).then(() => {
+                alert('Successfully Updated!')
+              }, err => console.log(err))
+            }
+          })
+        })
+      ).subscribe()
+    }, errr => console.log(errr))
   }
 
   viewModal(offer: Offer) {
@@ -222,10 +264,14 @@ export class DeleteOfferDialog {
 export class EditOfferDialog {
   editor = ClassicEditor
   err = ''
+  thumb: string
+
   constructor(
     public dialogRef: MatDialogRef<EditOfferDialog>,
     @Inject(MAT_DIALOG_DATA) public offer
-  ) {}
+  ) {
+    this.thumb = this.offer.image
+  }
 
   cancel() {
     this.dialogRef.close()
@@ -244,5 +290,9 @@ export class EditOfferDialog {
 
   onChange( { editor }: ChangeEvent ) {
     this.offer.text = editor.getData();
+  }
+
+  fileSelected(event) {
+    this.offer.image = event.target.files[0]
   }
 }

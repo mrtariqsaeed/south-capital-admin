@@ -1,6 +1,11 @@
 <h1 mat-dialog-title>{{ offer.title }}</h1>
 <div mat-dialog-content>
   <p>{{ err }}</p>
+  
+  <img [src]='thumb' style='width: 80%' *ngIf='thumb' /><br><br>
+
+  <label> اختر صوره جديده </label><br><br>
+  <input type='file' (change)='fileSelected($event)' /><br><br><br>
 
   <mat-form-field>
     <input matInput type='text' [(ngModel)]='offer.title' placeholder=" العنوان " />

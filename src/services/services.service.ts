@@ -42,7 +42,6 @@ export class ServicesService {
   deleteService(service: Service) {
     if(service.image)
       this.afstorage.storage.refFromURL(service.image).delete()
-
     return this.afs.doc('services/' + service.id).delete()
   }
 }
