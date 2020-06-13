@@ -9,14 +9,17 @@ import { Router } from '@angular/router'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  email: string
+  password: string
 
+  
   constructor(public afAuth: AngularFireAuth, public router: Router) { }
 
   ngOnInit() {
   }
 
   login() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(() => {
+    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then(() => {
       this.router.navigate(['/home'])
     })
   }

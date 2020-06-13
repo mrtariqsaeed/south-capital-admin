@@ -2,14 +2,14 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core'
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { Offer } from '../../models/offerInterface'
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular'
 import { AngularFireStorage } from '@angular/fire/storage'
 import { take, finalize } from 'rxjs/operators'
 import { OffersService } from '../../services/offers.service'
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs'
 import { SlideshowService } from '../../services/slideshow.service'
-import { Slide } from 'src/models/slideInterface';
+import { Slide } from 'src/models/slideInterface'
 
 @Component({
   selector: 'app-offers',
@@ -26,7 +26,7 @@ export class OffersComponent implements OnInit {
 
   sub1: Subscription
 
-  uploadPercent: Observable<number>;
+  uploadPercent: Observable<number>
   url: Observable<string>
 
   constructor(
@@ -47,13 +47,13 @@ export class OffersComponent implements OnInit {
   }
 
   addOffer(offer: Offer) {
-    const file = offer.image;
-    const filePath = `offers\/img${new Date().getTime()}.jpg`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, file);
+    const file = offer.image
+    const filePath = `offers\/img${new Date().getTime()}.jpg`
+    const fileRef = this.storage.ref(filePath)
+    const task = this.storage.upload(filePath, file)
 
     // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
+    this.uploadPercent = task.percentageChanges()
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().pipe(take(1)).subscribe((url: string) => {
@@ -131,13 +131,13 @@ export class OffersComponent implements OnInit {
 
   updateImage(offer: Offer, oldImage: string) {
     this.storage.storage.refFromURL(oldImage).delete().then(() => {
-      const file = offer.image;
-      const filePath = `offers\/img${new Date().getTime()}.jpg`;
-      const fileRef = this.storage.ref(filePath);
-      const task = this.storage.upload(filePath, file);
+      const file = offer.image
+      const filePath = `offers\/img${new Date().getTime()}.jpg`
+      const fileRef = this.storage.ref(filePath)
+      const task = this.storage.upload(filePath, file)
   
       // observe percentage changes
-      // this.uploadPercent = task.percentageChanges();
+      // this.uploadPercent = task.percentageChanges()
       task.snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().pipe(take(1)).subscribe((url: string) => {
@@ -218,7 +218,7 @@ export class AddOfferDialog {
   }
 
   onChange( { editor }: ChangeEvent ) {
-    this.offer.text = editor.getData();
+    this.offer.text = editor.getData()
   }
 
   fileSelected(event) {
@@ -289,7 +289,7 @@ export class EditOfferDialog {
   }
 
   onChange( { editor }: ChangeEvent ) {
-    this.offer.text = editor.getData();
+    this.offer.text = editor.getData()
   }
 
   fileSelected(event) {

@@ -1,15 +1,18 @@
-<section style="max-width: 400px;">
+<section style="max-width: 400px;" dir="ltr">
     <mat-card>
         <mat-card-header>
             <mat-card-title>
-                تسجيل دخول
+                ADMIN
             </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <!-- <mat-form-field>
-                <input matInput type="text" placeholder="" />
-            </mat-form-field> -->
-            <button mat-flat-button color='warn' (click)='login()' style='display: block; margin: 0px auto 30px auto;'>Login With Google</button>
+            <mat-form-field style="text-align: left;margin: 0 auto;display: block;">
+                <input matInput type="text" placeholder="Email" [(ngModel)]='email' />
+            </mat-form-field>
+            <mat-form-field style="text-align: left;margin: 0 auto;display: block;">
+                <input matInput type="password" placeholder="Password" [(ngModel)]='password' />
+            </mat-form-field>
+            <button mat-flat-button color='primary' (click)='login()' style='display: block; margin: 30px auto 30px auto;padding-right: 30px;padding-left: 30px;'>Login</button>
         </mat-card-content>
     </mat-card>
 </section>
