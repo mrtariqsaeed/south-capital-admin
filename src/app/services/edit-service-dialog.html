@@ -16,9 +16,7 @@
         <input matInput type='text' [(ngModel)]='service.title' placeholder=" العنوان " />
     </mat-form-field>
   
-    <mat-form-field>
-      <textarea matInput type='text' [(ngModel)]='service.text' placeholder=" الوصف " ></textarea>
-    </mat-form-field>
+    <ckeditor [editor]='editor' [data]='service.text' (change)='onChange($event)'></ckeditor>
   
   
   </div>

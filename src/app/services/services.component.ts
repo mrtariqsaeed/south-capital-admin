@@ -239,9 +239,11 @@ export class DeleteServiceDialog {
       this.dialogRef.close(service)
     }
   }
+
   cancel() {
     this.dialogRef.close()
   }
+  
 }
 
 
@@ -255,6 +257,7 @@ export class DeleteServiceDialog {
 })
 
 export class EditServiceDialog {
+  editor = ClassicEditor
   thumb: string
   err = ''
   constructor(
@@ -277,6 +280,10 @@ export class EditServiceDialog {
       برجاء ادخال كافه البيانات
       `
     }
+  }
+
+  onChange( { editor }: ChangeEvent ) {
+    this.service.text = editor.getData();
   }
 
   fileSelected(event) {

@@ -11,12 +11,13 @@
         <input matInput type='text' [(ngModel)]='service.title' placeholder=" العنوان " />
     </mat-form-field>
   
-    <mat-form-field>
-      <textarea matInput type='text' [(ngModel)]='service.text' placeholder=" الوصف " ></textarea>
-    </mat-form-field>
-  
+    <ckeditor [editor]='editor' data='' (change)='onChange($event)' dir="rtl"></ckeditor>
+
+    <br>
+    <p> اختر صوره </p>
     <input type='file' placeholder=' اختر صوره ' (change)='fileSelected($event)' />
-  
+    <br><br><br><br>
+
   </div>
   <div mat-dialog-actions>
     <button mat-stroked-button color="basic" (click)='save()'>
