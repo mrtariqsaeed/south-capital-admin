@@ -36,12 +36,12 @@ export class OffersService {
   updateOffer(offer: Offer) {
     let id = offer.id
     delete offer.id
-    return this.afs.doc('offers/' + id).update({title: offer.title, brief: offer.brief, text: offer.text})
+    return this.afs.doc('offers/' + id).update(offer)
   }
 
   deleteOffer(offer: Offer) {
     if(offer.image)
-      this.afstorage.storage.refFromURL(offer.image).delete()
+      this.afstorage.storage.refFromURL(offer.image).delete().catch(err => console.log(err))
     this.afs.collection('slide')
     return this.afs.doc('offers/' + offer.id).delete()
   }

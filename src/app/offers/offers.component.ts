@@ -105,6 +105,7 @@ export class OffersComponent implements OnInit {
 
   editModal(offer: Offer) {
     const img = offer.image
+    console.log(img)
     const modal = this.dialog.open(EditOfferDialog, {
       width: '400px',
       data: offer
